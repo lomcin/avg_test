@@ -1,0 +1,63 @@
+#pragma once
+#include <stdlib.h>
+#include <math.h>
+#include <assert.h>
+
+//// INPUT
+int *input_vector = NULL;
+size_t input_vector_size = 0;
+
+int init_input_vector(size_t size)
+{
+    assert(input_vector == NULL);
+    input_vector = (int *)malloc(size * sizeof(int));
+    input_vector_size = size;
+    for (int i = 0; i < size; ++i)
+    {
+        input_vector[i] = rand() % (1 << 12);
+    }
+}
+
+int print_input_vector()
+{
+    assert(input_vector != NULL);
+    printf("input_vector:");
+    for (int i = 0; i < input_vector_size; ++i)
+    {
+        printf(" %d", input_vector[i]);
+    }
+    printf("\n");
+}
+
+int free_input_vector()
+{
+    assert(input_vector != NULL);
+    free(input_vector);
+}
+
+/// BUFFER
+int *buffer_vector = NULL;
+size_t buffer_vector_size = 0;
+
+int init_buffer_vector(size_t size)
+{
+    buffer_vector = (int *)calloc(size, sizeof(int));
+    buffer_vector_size = size;
+}
+
+int print_buffer_vector()
+{
+    assert(buffer_vector != NULL);
+    printf("buffer_vector:");
+    for (int i = 0; i < buffer_vector_size; ++i)
+    {
+        printf(" %d", buffer_vector[i]);
+    }
+    printf("\n");
+}
+
+int free_buffer_vector()
+{
+    assert(buffer_vector != NULL);
+    free(buffer_vector);
+}
