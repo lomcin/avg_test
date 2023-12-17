@@ -28,7 +28,7 @@ int main_vector()
 {
     printf("%s\n", __func__);
     int avg = 0;
-    bufferi_t b;            // buffer struct
+    bufferi_t b;                   // buffer struct
     bufferi_init(&b, WINDOW_SIZE); // initialize buffer with WINDOW_SIZE as maximum size
 
     for (int i = 0; i < input_vector_size; ++i)
@@ -42,10 +42,10 @@ int main_vector()
             bufferi_push_and_pop(&b, input_vector[i], NULL); // O(1)
         }
         bufferi_avgi(&b, &avg); // O(n)
-    #ifndef BENCHMARK
+#ifndef BENCHMARK
         bufferi_print(&b);
         printf("avg: %d\n", avg);
-    #endif
+#endif
     }
 
     bufferi_free(&b);

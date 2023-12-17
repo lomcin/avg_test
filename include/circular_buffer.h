@@ -22,6 +22,9 @@
 #pragma once
 #include <stdlib.h>
 
+// Only use this if you know what you are doing!!!
+// #define NO_ASSERT
+
 typedef struct bufferi_st
 {
     int *data;       // buffer data pointer
@@ -34,8 +37,10 @@ typedef struct bufferi_st
 // This is just a quick clear, without writing zeros, the data is still available.
 void bufferi_clear(bufferi_t *b)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
+#endif
 
     // initializing size as 0
     b->size = 0;
@@ -46,8 +51,10 @@ void bufferi_clear(bufferi_t *b)
 
 void bufferi_init(bufferi_t *b, size_t max_size)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
+#endif
 
     // allocate the requested size
     b->data = (int *)malloc(max_size * sizeof(int));
@@ -70,11 +77,13 @@ void bufferi_init(bufferi_t *b, size_t max_size)
 
 void bufferi_free(bufferi_t *b)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
 
     // check if data is allocated before trying to deallocate
     assert(b->data != NULL);
+#endif
 
     // free data
     free(b->data);
@@ -91,11 +100,13 @@ void bufferi_free(bufferi_t *b)
 
 int *bufferi_at(bufferi_t *b, size_t pos)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
 
     // check if buffer has data
     assert(b->data != NULL);
+#endif
 
     size_t circular_pos = (pos + b->cur) % b->max_size;
 
@@ -108,6 +119,7 @@ int *bufferi_at(bufferi_t *b, size_t pos)
 
 int bufferi_get(bufferi_t *b, size_t pos)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
 
@@ -116,6 +128,7 @@ int bufferi_get(bufferi_t *b, size_t pos)
 
     // check if position is valid
     assert((pos >= 0) && (pos < b->size));
+#endif
 
     // return value from circular position in buffer data
     return *bufferi_at(b, pos);
@@ -123,11 +136,13 @@ int bufferi_get(bufferi_t *b, size_t pos)
 
 void bufferi_push_back(bufferi_t *b, int value)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
 
     // check if circular buffer is not full
     assert(b->size < b->max_size);
+#endif
 
     // get possible position for new value
     int *data = bufferi_at(b, b->size);
@@ -141,11 +156,13 @@ void bufferi_push_back(bufferi_t *b, int value)
 
 void bufferi_pop_front(bufferi_t *b, int *value)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
 
     // check if circular buffer is not empty
     assert(b->size > 0);
+#endif
 
     // get possible position for first value
     int *data = bufferi_at(b, 0);
@@ -165,8 +182,10 @@ void bufferi_pop_front(bufferi_t *b, int *value)
 
 void bufferi_print(bufferi_t *b)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
+#endif
 
     printf("bufferi:");
     for (size_t p = 0; p < b->size; ++p)
@@ -178,8 +197,10 @@ void bufferi_print(bufferi_t *b)
 
 void bufferi_push_and_pop(bufferi_t *b, int push_value, int *pop_value)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
+#endif
 
     // pop front before overflowing
     bufferi_pop_front(b, pop_value);
@@ -190,8 +211,13 @@ void bufferi_push_and_pop(bufferi_t *b, int push_value, int *pop_value)
 
 void bufferi_avgi(bufferi_t *b, int *avg)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
+
+    // check if avg return is not null
+    assert(avg != NULL);
+#endif
 
     int acc = 0;
     for (size_t p = 0; p < b->size; ++p)
@@ -203,8 +229,13 @@ void bufferi_avgi(bufferi_t *b, int *avg)
 
 void bufferi_avgd(bufferi_t *b, double *avg)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
+
+    // check if avg return is not null
+    assert(avg != NULL);
+#endif
 
     double acc = 0.0;
     for (size_t p = 0; p < b->size; ++p)
@@ -216,8 +247,13 @@ void bufferi_avgd(bufferi_t *b, double *avg)
 
 void bufferi_avgf(bufferi_t *b, float *avg)
 {
+#ifndef NO_ASSERT
     // check if buffer is not null
     assert(b != NULL);
+
+    // check if avg return is not null
+    assert(avg != NULL);
+#endif
 
     float acc = 0.0f;
     for (size_t p = 0; p < b->size; ++p)

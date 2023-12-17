@@ -33,14 +33,13 @@ int main()
     // note: this will allocate the BENCHMARK_SIZE*sizeof(int) in memory
     init_input_vector(BENCHMARK_SIZE);
 #else
-    init_input_vector(BSZM*4);
+    init_input_vector(BSZM * 4);
     print_input_vector();
 #endif
 
     time_t t_begin;
     time_t t_end;
     double secs_iterative, secs_vector;
-
 
     time(&t_begin);
     main_iterative();
