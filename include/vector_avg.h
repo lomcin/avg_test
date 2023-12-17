@@ -41,9 +41,11 @@ int main_vector()
         {
             bufferi_push_and_pop(&b, input_vector[i], NULL); // O(1)
         }
-        bufferi_print(&b);
         bufferi_avgi(&b, &avg); // O(n)
+    #ifndef BENCHMARK
+        bufferi_print(&b);
         printf("avg: %d\n", avg);
+    #endif
     }
 
     bufferi_free(&b);

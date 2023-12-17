@@ -48,8 +48,10 @@ int main_iterative()
         avg_acc += input_vector[i];
         // printf("add %d == %d\n", input_vector[i], avg_acc);
         avg_qnt = b.size;
+    #ifndef BENCHMARK
         bufferi_print(&b);
         printf("avg: %d\n", avg_acc/avg_qnt); // O(1)
+    #endif
     }
 
     bufferi_free(&b);
