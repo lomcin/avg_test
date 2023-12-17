@@ -21,10 +21,14 @@
 // SOFTWARE.
 #pragma once
 #define BSZM 4
-#define WINDOW_SIZE 128
+#define WINDOW_SIZE 3
 #define BENCHMARK
 
 #ifdef BENCHMARK
+
+#undef WINDOW_SIZE
+
+#define WINDOW_SIZE 128
 
 // 1GB
 // #define BENCHMARK_SIZE 1024*1024*1024
